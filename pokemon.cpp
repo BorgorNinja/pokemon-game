@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Pokemon {
+class Dino {
 public:
     string name;
     string type;
@@ -15,7 +15,7 @@ public:
     int maxHp;
     int attackPower;
 
-    Pokemon(string n, string t, int l, int h, int ap)
+    Dino(string n, string t, int l, int h, int ap)
         : name(n), type(t), level(l), maxHp(h), hp(h), attackPower(ap) {}
 
     void takeDamage(int damage) {
@@ -33,42 +33,42 @@ public:
     }
 };
 
-void displayPokemon(const Pokemon& p) {
-    cout << p.name << " (Type: " << p.type << ", Level: " << p.level << ", HP: " << p.hp << "/" << p.maxHp << ")" << endl;
+void displayDino(const Dino& d) {
+    cout << d.name << " (Type: " << d.type << ", Level: " << d.level << ", HP: " << d.hp << "/" << d.maxHp << ")" << endl;
 }
 
-vector<Pokemon> generateRandomPlayerPokemon() {
-    vector<Pokemon> allPokemon = {
-        Pokemon("Charmander", "Fire", 5, 39, 52),
-        Pokemon("Squirtle", "Water", 5, 44, 48),
-        Pokemon("Bulbasaur", "Grass", 5, 45, 49),
-        Pokemon("Pikachu", "Electric", 5, 35, 55),
-        Pokemon("Geodude", "Rock", 5, 40, 45),
-        Pokemon("Pidgey", "Flying", 5, 40, 45),
-        Pokemon("Rattata", "Normal", 5, 30, 56),
-        Pokemon("Zubat", "Poison", 5, 40, 45),
-        Pokemon("Machop", "Fighting", 5, 45, 50),
-        Pokemon("Abra", "Psychic", 5, 25, 20),
-        Pokemon("Magnemite", "Steel", 5, 25, 20),
-        Pokemon("Diglett", "Ground", 5, 10, 55),
-        Pokemon("Vulpix", "Fire", 5, 38, 41),
-        Pokemon("Jigglypuff", "Fairy", 5, 115, 45),
-        Pokemon("Oddish", "Grass", 5, 45, 50)
+vector<Dino> generateRandomPlayerDinos() {
+    vector<Dino> allDinos = {
+        Dino("FlameRex", "Fire", 5, 39, 52),
+        Dino("AquaSaur", "Water", 5, 44, 48),
+        Dino("LeafZilla", "Grass", 5, 45, 49),
+        Dino("Sparky", "Electric", 5, 35, 55),
+        Dino("Rocky", "Rock", 5, 40, 45),
+        Dino("Windrake", "Flying", 5, 40, 45),
+        Dino("Terra", "Ground", 5, 30, 56),
+        Dino("Venom", "Poison", 5, 40, 45),
+        Dino("Brute", "Fighting", 5, 45, 50),
+        Dino("Mystic", "Psychic", 5, 25, 20),
+        Dino("Steelus", "Steel", 5, 25, 20),
+        Dino("Tremor", "Ground", 5, 10, 55),
+        Dino("Inferno", "Fire", 5, 38, 41),
+        Dino("Fairydactyl", "Fairy", 5, 115, 45),
+        Dino("Foliage", "Grass", 5, 45, 50)
     };
 
-    vector<Pokemon> playerPokemon;
+    vector<Dino> playerDinos;
     unordered_set<string> chosenTypes;
 
-    while (playerPokemon.size() < 3) {
-        int index = rand() % allPokemon.size();
-        Pokemon p = allPokemon[index];
-        if (chosenTypes.find(p.type) == chosenTypes.end()) {
-            playerPokemon.push_back(p);
-            chosenTypes.insert(p.type);
+    while (playerDinos.size() < 3) {
+        int index = rand() % allDinos.size();
+        Dino d = allDinos[index];
+        if (chosenTypes.find(d.type) == chosenTypes.end()) {
+            playerDinos.push_back(d);
+            chosenTypes.insert(d.type);
         }
     }
 
-    return playerPokemon;
+    return playerDinos;
 }
 
 int main() {
@@ -79,19 +79,19 @@ int main() {
     vector<string> itemHealing = {"Potion"};
     vector<string> itemRevives = {"Revive", "Max Revive"};
     vector<string> itemStatBoosters = {"X Attack", "X Defense", "X Speed"};
-    vector<string> itemThrowables = {"Poke Ball", "Great Ball", "Ultra Ball", "Master Ball"};
+    vector<string> itemThrowables = {"Dino Ball", "Great Ball", "Ultra Ball", "Master Ball"};
 
-    vector<Pokemon> playerPokemon = generateRandomPlayerPokemon();
-    vector<Pokemon> enemyPokemon = {
-        Pokemon("Pidgey", "Flying", 3, 40, 45),
-        Pokemon("Rattata", "Normal", 4, 30, 56)
+    vector<Dino> playerDinos = generateRandomPlayerDinos();
+    vector<Dino> enemyDinos = {
+        Dino("Windrake", "Flying", 3, 40, 45),
+        Dino("Terra", "Ground", 4, 30, 56)
     };
 
-    Pokemon* currentPlayerPokemon = &playerPokemon[0];
-    Pokemon* currentEnemyPokemon = &enemyPokemon[0];
+    Dino* currentPlayerDino = &playerDinos[0];
+    Dino* currentEnemyDino = &enemyDinos[0];
 
     while (finalChoice != "yes") {
-        cout << "Pokemon Game v1.0 \nA. Start Game \nB. Options \nC. Exit \nChoice: ";
+        cout << "DinoBattle v1.0 \nA. Start Game \nB. Options \nC. Exit \nChoice: ";
         cin >> options;
         cout << "You picked " << options << endl;
 
@@ -104,23 +104,23 @@ int main() {
             string TrainerName;
             cin >> TrainerName;
 
-            cout << "A wild " << currentEnemyPokemon->name << " appears!" << endl;
+            cout << "A wild " << currentEnemyDino->name << " appears!" << endl;
 
-            while (!currentPlayerPokemon->isFainted() && !currentEnemyPokemon->isFainted()) {
-                cout << "\nYour Pokemon: ";
-                displayPokemon(*currentPlayerPokemon);
-                cout << "Enemy Pokemon: ";
-                displayPokemon(*currentEnemyPokemon);
+            while (!currentPlayerDino->isFainted() && !currentEnemyDino->isFainted()) {
+                cout << "\nYour Dino: ";
+                displayDino(*currentPlayerDino);
+                cout << "Enemy Dino: ";
+                displayDino(*currentEnemyDino);
 
                 cout << "\nChoose an action: \nF. FIGHT \nI. ITEM \nP. POKE \nR. RUN \nChoice: ";
                 cin >> battleChoice;
 
                 if (battleChoice == "F" || battleChoice == "f") {
-                    cout << currentPlayerPokemon->name << " attacks!" << endl;
-                    currentEnemyPokemon->takeDamage(currentPlayerPokemon->attackPower);
-                    if (!currentEnemyPokemon->isFainted()) {
-                        cout << currentEnemyPokemon->name << " attacks back!" << endl;
-                        currentPlayerPokemon->takeDamage(currentEnemyPokemon->attackPower);
+                    cout << currentPlayerDino->name << " attacks!" << endl;
+                    currentEnemyDino->takeDamage(currentPlayerDino->attackPower);
+                    if (!currentEnemyDino->isFainted()) {
+                        cout << currentEnemyDino->name << " attacks back!" << endl;
+                        currentPlayerDino->takeDamage(currentEnemyDino->attackPower);
                     }
                 } else if (battleChoice == "I" || battleChoice == "i") {
                     cout << "Available items: " << endl;
@@ -136,63 +136,63 @@ int main() {
                     if (itemChoice == "Potion") {
                         int healAmount = 20; // Simplified healing amount
                         cout << "You used " << itemChoice << "!" << endl;
-                        currentPlayerPokemon->heal(healAmount);
+                        currentPlayerDino->heal(healAmount);
                     } else {
                         cout << "Invalid item choice." << endl;
                     }
                 } else if (battleChoice == "P" || battleChoice == "p") {
-                    cout << "Choose a Pokemon to swap: " << endl;
-                    for (size_t i = 0; i < playerPokemon.size(); ++i) {
+                    cout << "Choose a Dino to swap: " << endl;
+                    for (size_t i = 0; i < playerDinos.size(); ++i) {
                         cout << i + 1 << ". ";
-                        displayPokemon(playerPokemon[i]);
+                        displayDino(playerDinos[i]);
                     }
 
                     int swapChoice;
                     cin >> swapChoice;
 
-                    if (swapChoice > 0 && swapChoice <= playerPokemon.size()) {
-                        currentPlayerPokemon = &playerPokemon[swapChoice - 1];
-                        cout << "Go, " << currentPlayerPokemon->name << "!" << endl;
+                    if (swapChoice > 0 && swapChoice <= playerDinos.size()) {
+                        currentPlayerDino = &playerDinos[swapChoice - 1];
+                        cout << "Go, " << currentPlayerDino->name << "!" << endl;
                     } else {
                         cout << "Invalid choice." << endl;
                     }
                 } else if (battleChoice == "R" || battleChoice == "r") {
-                    if (rand() % 10 < 1 || currentPlayerPokemon->level >= currentEnemyPokemon->level) {
+                    if (rand() % 10 < 1 || currentPlayerDino->level >= currentEnemyDino->level) {
                         cout << "You successfully ran away!" << endl;
                         break;
                     } else {
                         cout << "You failed to run away!" << endl;
-                        currentPlayerPokemon->takeDamage(currentEnemyPokemon->attackPower);
+                        currentPlayerDino->takeDamage(currentEnemyDino->attackPower);
                     }
                 } else {
                     cout << "Invalid choice. Please choose F, I, P, or R." << endl;
                 }
 
-                if (currentPlayerPokemon->isFainted()) {
-                    cout << currentPlayerPokemon->name << " fainted!" << endl;
+                if (currentPlayerDino->isFainted()) {
+                    cout << currentPlayerDino->name << " fainted!" << endl;
                     bool allFainted = true;
-                    for (Pokemon& p : playerPokemon) {
-                        if (!p.isFainted()) {
+                    for (Dino& d : playerDinos) {
+                        if (!d.isFainted()) {
                             allFainted = false;
                             break;
                         }
                     }
                     if (allFainted) {
-                        cout << "All your Pokemon have fainted! Game Over." << endl;
+                        cout << "All your Dinos have fainted! Game Over." << endl;
                         break;
                     } else {
-                        cout << "Choose another Pokemon!" << endl;
-                        for (size_t i = 0; i < playerPokemon.size(); ++i) {
+                        cout << "Choose another Dino!" << endl;
+                        for (size_t i = 0; i < playerDinos.size(); ++i) {
                             cout << i + 1 << ". ";
-                            displayPokemon(playerPokemon[i]);
+                            displayDino(playerDinos[i]);
                         }
 
                         int swapChoice;
                         cin >> swapChoice;
 
-                        if (swapChoice > 0 && swapChoice <= playerPokemon.size()) {
-                            currentPlayerPokemon = &playerPokemon[swapChoice - 1];
-                            cout << "Go, " << currentPlayerPokemon->name << "!" << endl;
+                        if (swapChoice > 0 && swapChoice <= playerDinos.size()) {
+                            currentPlayerDino = &playerDinos[swapChoice - 1];
+                            cout << "Go, " << currentPlayerDino->name << "!" << endl;
                         } else {
                             cout << "Invalid choice." << endl;
                         }
@@ -200,8 +200,8 @@ int main() {
                 }
             }
 
-            if (currentEnemyPokemon->isFainted()) {
-                cout << "You defeated " << currentEnemyPokemon->name << "!" << endl;
+            if (currentEnemyDino->isFainted()) {
+                cout << "You defeated " << currentEnemyDino->name << "!" << endl;
             }
 
         } else if (options == "B" || options == "b") {
