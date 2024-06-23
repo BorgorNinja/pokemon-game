@@ -93,14 +93,14 @@ int main() {
     while (finalChoice != "yes") {
         cout << "DinoBattle v1.0 \nA. Start Game \nB. Options \nC. Exit \nChoice: ";
         cin >> options;
-        cout << "You picked " << options << endl;
+        cout << "You have picked " << options << endl;
 
         if (options == "A" || options == "a") {
             finalChoice = "yes";
             string battleChoice;
 
-            cout << "Starting game now" << endl;
-            cout << "Enter Trainer Name: ";
+            cout << "Starting your game now" << endl;
+            cout << "Enter Your Player Name: ";
             string TrainerName;
             cin >> TrainerName;
 
